@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Shaw">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
+  <!-- <script type="text/javascript" src="http://cdn.yskj.howlab.cn/js/zepto.min.js"></script> -->
+  <link rel="stylesheet" href="http://cdn.yskj.howlab.cn/css/vanke/dialog.css">
+  <script type="text/javascript" src="http://cdn.yskj.howlab.cn/js/common/jquery-3.2.1.min.js"></script>
+
+
+
+  <title>西安万科首款口红机｜定制口红等你拿
+  </title>
+  <style>
+    body,
+    html {
+      font-weight: bold;
+      max-height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .jp {
+      position: fixed;
+      bottom: 0;
+      height: 320px;
+      width: 100%;
+      padding-top: 20px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-radius: 10px 10px 0px 0px;
+      box-sizing: border-box;
+
+      background: white;
+    }
+
+    .jp .head img {
+      width: 65px;
+    }
+
+    #again {
+      display: none
+    }
+
+    #jp {
+      display: none;
+    }
+
+    .head {
+      font-weight: bold;
+      position: absolute;
+      left: calc(50% - 32px);
+      top: -32px;
+    }
+
+    .close {
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      line-height: 15px;
+      position: absolute;
+      top: 11px;
+      right: 11px;
+      border: 1px solid #7D7D7D;
+      border-radius: 50%;
+      font-size: 12px;
+      color: #7D7D7D;
+    }
+
+    .list .label {
+      width: 100%;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      height: 70px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      background: linear-gradient(135deg, rgba(248, 80, 50, 1) 0%, rgba(231, 56, 39, 1) 100%);
+      border-radius: 5px;
+    }
+
+    .list {
+      margin-top: 10px;
+    }
+
+    .g_img img {
+      width: 40px;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .g_img {
+      display: flex;
+      align-items: center;
+    }
+
+    .g_name {
+      margin-left: 17px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .g_name .p:last-child {
+      margin-top: 2px;
+      font-size: 12px;
+    }
+
+    .goods {
+      display: flex;
+      align-items: center;
+
+    }
+
+    .j_bottom {
+      font-size: 10px;
+      position: absolute;
+      left: 0;
+      box-sizing: border-box;
+      bottom: 10px;
+      text-align: center;
+      width: 100%
+    }
+
+    #hb {
+      top: 0;
+      left: 0;
+      display: none;
+    }
+
+    .hb {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hb>img {
+      width: 290px;
+    }
+
+    .ewm {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 45px;
+    }
+
+    .hb_contain>div {
+      bottom: 22px;
+      color: #3A0002;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      position: absolute;
+    }
+
+    .hb_contain {
+      position: relative;
+      font-size: 0;
+    }
+
+    .ewm img {
+      width: 45px;
+    }
+
+    .hb_contain>div>img {
+      margin-right: 10px;
+      width: 32px;
+    }
+
+    .hb_contain>img {
+      width: 290px;
+    }
+
+    .pop_share {
+      display: none;
+    }
+
+    #again .label:nth-child(even) {
+      background: linear-gradient(135deg, rgba(0, 198, 255, 1) 0%, rgba(0, 114, 255, 1) 100%, rgba(0, 114, 255, 1) 100%);
+    }
+
+    .read {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+      font-size: 0;
+      -webkit-overflow-scrolling: touch;
+      overflow-scrolling: touch;
+      height: 100vh;
+      overflow-y: auto;
+      display: none;
+      -webkit-overflow-scrolling: touch
+    }
+
+    .read>img {
+      width: 100%;
+    }
+
+    #return {
+      display: none;
+      padding: 10px;
+      font-size: 16px;
+      background: #FF7C60;
+      color: white;
+      border-radius: 10px;
+      position: fixed;
+      bottom: 20px;
+      left: 10px;
+      z-index: 5;
+    }
+
+    #jp .label {
+      display: none;
+    }
+
+    #slide {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      animation: jump 2s 0s linear infinite;
+
+    }
+
+    #slide img {
+
+      width: 50px;
+    }
+
+    #avatar {
+      border-radius: 50%;
+    }
+
+    .loading {
+      position: absolute;
+      z-index: 5;
+      background: #FF7C60;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes jump {
+      0% {
+        transform: translate(0, 0px)
+      }
+      50% {
+        transform: translate(0, -20px)
+      }
+      100% {
+        transform: translate(0, 0px)
+      }
+    }
+
+    .loading_img>img {
+      width: 200px;
+    }
+
+    .progress_l {
+      border-radius: 10px;
+      border: 2px solid #AD0005;
+      width: 200px;
+      height: 5px;
+      position: relative;
+    }
+
+    .progress_l span {
+      position: absolute;
+      left: 0;
+      border-radius: 10px;
+      background: #F1452D;
+      width: 0;
+      height: 5px;
+    }
+
+    .loading_img>p {
+      font-size: 14px;
+      color: #AD0005;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .loading .bottom img {
+      width: 100%;
+    }
+
+    .loading .bottom {
+      width: 100%;
+      position: absolute;
+      bottom: 10px;
+    }
+
+    .pop_share>p {
+      display: none;
+      position: absolute;
+      bottom: 20px;
+      z-index: 5;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 16px;
+    }
+    .opa{
+      position:fixed;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:6;
+    }
+  </style>
+  <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body>
+  <div class="opa"></div>
+  <div class="loading">
+    <div class="loading_img">
+      <img src="http://yskj.howlab.cn/images/vanke/kh/target1.png" />
+      <div class="progress_l">
+        <span></span>
+      </div>
+      <p>loading...</p>
+    </div>
+    <div class="bottom">
+      <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/bottom.png?2" alt="">
+    </div>
+  </div>
+  <div class="jp" id="jp">
+    <p class="j_bottom">奖品数量有限先到先得<br> 兑换时间：2019.11.11-11-12 兑换地点：西安市雁塔区曲江创意谷</p>
+
+    <span class="head">
+      <img src="http://yskj.howlab.cn/images/vanke/kh/grade.png" alt="">
+    </span>
+    <div class="header">
+      <span>查看奖品</span>
+      <span class="close" onclick="closeX()">
+        x
+      </span>
+    </div>
+    <div class="list">
+      <div class="label">
+        <div class="goods">
+          <span class="g_img">
+            <img src="http://yskj.howlab.cn/images/vanke/kh/kh.png" alt="">
+          </span>
+          <div class="g_name">
+            <p>Mac口红</p>
+            <p>奖品兑换码：<span id="code"><span></p>
+          </div>
+        </div>
+        <span>x1</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="again" class="jp">
+    <p class="j_bottom">点击链接/生成海报即可再获取一次游戏机会</p>
+    <span class="head">
+      <img src="http://yskj.howlab.cn/images/vanke/kh/xx.png" alt="">
+    </span>
+    <div class="header">
+      <span>获取再玩一次机会</span>
+      <span class="close" onclick="closeX()">
+        x
+      </span>
+    </div>
+    <div class="list">
+      <div class="label" onclick="read()">
+        <div class="goods">
+          <span class="g_img">
+            <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/grade2.png" alt="">
+          </span>
+          <div class="g_name">
+            <p>阅读西安万科双11主会场</p>
+            <p>获得一次游戏机机会</p>
+          </div>
+        </div>
+        <span>+1</span>
+      </div>
+      <div class="label" onclick="share()">
+        <div class="goods">
+          <span class="g_img">
+            <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/grade3.png" alt="">
+          </span>
+          <div class="g_name">
+            <p>扫码玩游戏</p>
+            <p>抢限量口红</p>
+          </div>
+        </div>
+        <span>X1</span>
+      </div>
+    </div>
+  </div>
+  <div class="pop_share">
+    <p>长按屏幕保存海报至手机相册，分享好友</p>
+    <div class="hb">
+      <div class="hb_contain">
+        <img id="hb" src="http://cdn.yskj.howlab.cn/images/vanke/kh/hb.png" alt="">
+
+        <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/hb.png" />
+        <div>
+          <img id="avatar" src="http://cdn.yskj.howlab.cn/images/vanke/kh/grade3.png" alt="">
+          <p><span id="nickname">Alue</span>邀请你玩游戏<br>抢西安万科双11口</p>
+        </div>
+        <span class="ewm">
+          <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ewm.png" />
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="read">
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct1.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct2.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct3.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct4.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct5.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct6.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct7.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct8.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct9.jpg" alt="">
+
+    <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/ct10.jpg" alt="">
+
+    <span id="return">返回获得游戏次数</span>
+    <span id="slide">
+      <img src="http://cdn.yskj.howlab.cn/images/vanke/kh/slide.png?1" alt="">
+    </span>
+  </div>
+</body>
+<script>
+  // var info = eval(<?php echo json_encode($data);?>);
+  var info = eval({ "appid": "wxa0d2071f60fa1054", "openid": "oNl92w3zSdKQuRj0l8hKDQzw7yTk", "avatar": "\/images\/avatar\/wxa0d2071f60fa1054\/oNl92w3zSdKQuRj0l8hKDQzw7yTk.jpg", "nickname": "Alue.", "data": { "id": "27", "openid": "oNl92w3zSdKQuRj0l8hKDQzw7yTk", "passed": "0", "isShared": "1", "isReaded": "1", "count": "0", "addTime": "2019-11-06 13:29:05", "lastTime": "2019-11-06 13:32:40", "code": "0" } });
+  var [gameConfig, obj, gameArchive] = [{}, {}, { level: 1, blood: 3, pass: false }];
+
+  var game
+  var ts = true
+  var is_success = 0
+  var game_num = 1
+  $('#nickname').text(info.nickname)
+  $('#avatar').attr('src', info.avatar)
+  if (info.data) {
+    $('#code').text(info.data.code)
+    is_success = info.data.passed ? info.data.passed : 0
+    game_num = info.data.count ? info.data.count : 1 //游戏次数
+  }
+
+  function closeX() {
+    console.log($)
+    $('.jp').hide()
+  }
+
+</script>
+
+<script>
+
+</script>
+<script type="text/javascript" src="http://cdn.yskj.howlab.cn/js/vanke/dialog.min.js"></script>
+<script type="text/javascript" src="http://cdn.yskj.howlab.cn/js/canvas.js"></script>
+<script>
+
+  function read() {
+    $('.read').fadeIn()
+  }
+  
+  $('.read').scroll(function () {
+    if ($('.read').scrollTop() > $('.read img').height() * 10 - 1000) {
+      $('#slide').hide()
+      $('#return').show()
+    }
+  })
+  function share() {
+    if ($('#hb').css('display') == 'inline') {
+      $('.pop_share').fadeIn()
+      $('.hb').show()
+      return
+    }
+    if ($('#hb').css('display') == 'block') {
+      $('.pop_share').fadeIn()
+      $('.hb').show()
+      return
+    }
+    $('.hb').click(function () {
+      $('.pop_share').hide()
+        $.ajax({
+          type: "POST",
+          url: "/vanke/AjaxGameCount.html?state=4brterij1o1g",
+          dataType: "json",
+          data: {
+            openid: info.openid,
+          },
+          success: function (res) {
+            if (res.ret == 0) {
+
+              game_num = res.data.count;
+              is_success = res.data.passed;
+              if (game_num > 0 || res.data.passed == '1') {
+                $.ajax({
+                  type: "POST",
+                  url: "/vanke/AjaxSubGameKh.html?state=4brterij1o1g",
+                  dataType: "json",
+                  data: {
+                    openid: info.openid,
+                  },
+                  success: function (res) {
+                    if (res.ret == 0) {
+
+                      gameArchive = { level: 1, blood: 3, pass: false };
+                      game.scene.start('gameScene');
+
+                    }
+                  }
+                })
+
+              }
+
+            }
+
+          }
+        })
+    })
+    $('.pop_share').fadeIn(600, function () {
+      var sc = $(document).dialog({
+        type: 'toast',
+        infoIcon: 'http://cdn.yskj.howlab.cn/images/icon/loading.gif',
+        infoText: '生成海报中...',
+      });
+
+      $('.share').fadeIn()
+      setTimeout(() => {
+        html2canvas(document.querySelector(".hb_contain"), {
+          allowTaint: false,
+          useCORS: true
+        }
+        ).then(canvas => {
+          // document.body.appendChild(canvas)
+          //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+          //把截取到的图片替换到a标签的路径下载  
+          // $('.hb').addClass('remo')
+          $.ajax({
+            type: "POST",
+            url: "/vanke/AjaxAddGameKh.html?state=4brterij1o1g",
+            dataType: "json",
+            data: {
+              openid: info.openid,
+              type: 2,
+
+            },
+            success: function (res) {
+              if (res.ret == 0) {
+                $(document).dialog({
+                  type: 'notice',
+                  infoText: '游戏次数+1',
+                  autoClose: 2500
+                });
+                game_num++;
+              }
+
+              $('.hb_contain').children().hide()
+              $("#hb").show()
+              $('.pop_share>p').fadeIn()
+              $("#hb").attr('src', canvas.toDataURL('image/png'));
+              sc.close()
+            }
+          })
+
+        });
+      }, 2000);
+
+
+
+    })
+
+  }
+  // wx.config({
+  //   debug: false,
+  //   appId: '<?php echo isset($share['appid']) ? $share['appid'] : ''; ?>',
+  //   timestamp: '<?php echo isset($share['js_time']) ? $share['js_time'] : ''; ?>',
+  //   nonceStr: '<?php echo isset($share['nonceStr']) ? $share['nonceStr'] : ''; ?>',
+  //   signature: '<?php echo isset($share['signature']) ? $share['signature'] : ''; ?>',
+  //   jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'hideMenuItems']
+  // });
+  // var shareMessage = {
+  //   title: '<?php echo isset($share['sharetitle']) ? $share['sharetitle'] : ''; ?>',
+  //   desc: '<?php echo isset($share['sharedesc']) ? $share['sharedesc'] : ''; ?>',
+  //   shareFriendsDesc: '<?php echo isset($share["shareFriendsDesc"]) ? $share["shareFriendsDesc"] : ""; ?>',
+  //   link: '<?php echo isset($share['shareUrl']) ? $share['shareUrl'] : ''; ?>',
+  //   imgUrl: '<?php echo isset($share['sharepic']) ? $share['sharepic'] : ''; ?>'
+	// };
+  // wx.ready(function () {
+
+  //   wx.hideMenuItems({
+  //     menuList: ['menuItem:copyUrl']
+  //   });
+  //   wx.onMenuShareTimeline({
+  //     title: shareMessage.desc,
+  //     link: shareMessage.link,
+  //     imgUrl: shareMessage.imgUrl,
+  //     success: function () {
+  //       sharefriends();
+  //     },
+  //     cancel: function () { }
+  //   });
+  //   wx.onMenuShareAppMessage({
+  //     title: shareMessage.title,
+  //     desc: shareMessage.shareFriendsDesc,
+  //     link: shareMessage.link,
+  //     imgUrl: shareMessage.imgUrl,
+  //     type: '',
+  //     dataUrl: '',
+  //     success: function () {
+  //       sharefriend();
+  //     },
+  //     cancel: function () { }
+  //   });
+  // });
+</script>
+
+</html>

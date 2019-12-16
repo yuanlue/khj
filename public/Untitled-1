@@ -1,0 +1,218 @@
+
+	$(function() {
+		document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==27){ // 按 Esc 
+                //要做的事情
+              }
+            if(e && e.keyCode==113){ // 按 F2 
+                 //要做的事情
+               }            
+             if(e && e.keyCode==13){ // enter 键
+                 //要做的事情
+                 if($('#home').hasClass('active')){
+                 	subOneForm();
+                 }
+                 //要做的事情
+                 if($('#profile').hasClass('active')){
+                 	subTwoForm();
+                 }
+            }
+       }; 
+	
+	
+		$("#getcode_num").click(function() {
+			$(this).attr("src", '/wsdtp/checkCode/service.do?' + Math.random());
+		});
+		
+		$("#send_phone_code_num").click(function(){
+			var code_num = $("#infocard").val();
+			var phone_str = $("#phone").val();
+			var len =phone_str.length; 
+			var phone = phone_str.substring(len-4,len); 
+			var dom_obj = $(this).get(0);
+			 
+			 if(phone == ''){
+			 	alert("请输入手机号码");
+			 }
+			$.post('/wsdtp/sendCodeNum.do',
+				{
+					code_num: code_num,
+					sjh	: phone
+				},function(data){
+					if(data.status==0){
+						settime(dom_obj);
+						alert('发送成功,请及时验证');
+					}else{
+						settime(dom_obj);
+						alert('发送异常,请重试');
+					}
+				},
+				'json');
+		});
+		
+		$("#sub_one").click(function() {
+			subOneForm();
+		});
+		
+		$("#sub_two").click(function() {
+			$("#sub_two").attr("disabled","true").html("处理中,请耐心等待...");
+			subTwoForm();
+		});
+		
+		
+	});
+	//信息卡用户提交表单
+	function subOneForm(){
+		var kh = $("#infocard").val();
+			var yzm = $("#code_num").val();
+			var login_type = '1';	
+			if(kh == '' || yzm == ''){
+				alert('信息卡或手机验证码不能为空');
+$("#sub_two").removeAttr("disabled").html("登录");
+				return;
+			}
+			if (browser != "chrome") {
+				alert("当前浏览器版本过低或不兼容本系统，请下载专用浏览器，感谢您的配合。");
+
+				return;
+			}else if(version > 47 && browser =="chrome"){
+				alert("当前谷歌浏览器不兼容本系统，请下载专用浏览器，感谢您的配合。");
+
+				return;
+			}else if(browserm.versions.android||browserm.versions.iPad||browserm.versions.iPhone){
+				alert("用户您好，本系统不支持移动端设备登录，请使用电脑登录本系统，感谢您的配合。");
+
+				return;
+			}else if(flagphone){
+				alert("用户您好，本系统不支持移动端设备登录，请使用电脑登录本系统，感谢您的配合。");
+
+				return;
+			}
+            $.post("/wsdtp/login.do", {
+                kh : kh,
+                yzm : yzm,
+                login_type : login_type
+            }, function(data) {
+                if(data.status == '-1'){
+                    alert(data.message);
+                }else if(data.status == '0'){
+                    location.href="/wsdtp/trainning/choose.do";
+                }else if(data.status == '2'){
+                    location.href="/wsdtp/trainning/videolist.do";
+                }
+            },'json');
+	}
+	//一般用户提交表单
+	function subTwoForm(){
+					var login_type = '2';	
+
+				$.post("/wsdtp/login.do", {
+					account : account,
+					verify_code_num : verify_code_num,
+					password : password,
+					login_type : login_type
+					
+				}, function(data) {
+
+					if(data.status == '-1'){
+						 alert("帐号 或 密码错误,请仔细检查");
+$("#sub_two").removeAttr("disabled").html("登录");
+						 $("#getcode_num").attr("src",'/wsdtp/checkCode/service.do?' + Math.random());  
+					}else if(data.status == '0'){
+						location.href="/wsdtp/trainning/videolist.do";
+					}
+				},'json');
+			
+		}
+
+	$(document)
+			.ready(
+					function() {
+						var doc = document, inputs = doc
+								.getElementsByTagName('input'), supportPlaceholder = 'placeholder' in doc
+								.createElement('input'), placeholder = function(
+								input) {
+							var text = input.getAttribute('placeholder'), defaultValue = input.defaultValue;
+							if (defaultValue == '') {
+								input.value = text;
+							}
+							input.onfocus = function() {
+								if (input.value === text) {
+									this.value = '';
+								}
+							};
+							input.onblur = function() {
+								if (input.value === '') {
+									this.value = text;
+								}
+							};
+						};
+						if (!supportPlaceholder) {
+							for ( var i = 0, len = inputs.length; i < len; i++) {
+								var input = inputs[i], text = input
+										.getAttribute('placeholder');
+								if (input.type === 'text' && text) {
+									placeholder(input);
+								}
+							}
+						}
+					});
+
+	$(function() {
+		if (!placeholderSupport()) { // 判断浏览器是否支持 placeholder
+			$('[placeholder]').focus(function() {
+				var input = $(this);
+				if (input.val() == input.attr('placeholder')) {
+					input.val('');
+					input.removeClass('placeholder');
+				}
+			}).blur(
+					function() {
+						var input = $(this);
+						if (input.val() == ''
+								|| input.val() == input.attr('placeholder')) {
+							input.addClass('placeholder');
+							input.val(input.attr('placeholder'));
+						}
+					}).blur();
+		};
+	});
+	
+	
+	function placeholderSupport() {
+		return 'placeholder' in document.createElement('input');
+	}
+	
+	var countdown=120; 
+	function settime(obj) { 
+	    if (countdown == 0) { 
+	        obj.setAttribute("class","btn mobile-color");
+	        obj.removeAttribute("disabled");
+	       	obj.innerHTML='免费获取验证码';
+	        countdown = 120; 
+	        return;
+	    } else {
+	        obj.setAttribute("class", "btn mobile-color-gray");
+	        obj.setAttribute("disabled","disabled");
+	        obj.innerHTML='重新发送(' + countdown + ')'; 
+	        countdown--;
+	    } 
+	setTimeout(function() {
+	    settime(obj); }
+	    ,1000);
+	}
+		
+	$("#infocard").click(function(){
+		$(".index-right-img").removeAttr("style");
+	});
+	
+	function hiddenimg(){
+		$(".index-right-img").attr("style","display:none");
+	}	
+	$("#account").click(function(){
+		$(".index-right-img-putong").removeAttr("style");
+	});
+	function hiddenimgputong(){
+		$(".index-right-img-putong").attr("style","display:none");
+	}
